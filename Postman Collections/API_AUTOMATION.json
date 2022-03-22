@@ -567,7 +567,7 @@
         },
         "method": "GET",
         "header": [],
-        "url": "https://ecommerceservice.herokuapp.com/orders/{{order_id}}"
+        "url": "https://ecommerceservice.herokuapp.com/orders/{{createdProductId}}"
       },
       "response": []
     },
