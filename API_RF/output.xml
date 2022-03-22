@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 4.0.2 (Python 3.10.1 on win32)" generated="20220322 11:45:06.641" rpa="false" schemaversion="2">
+<suite id="s1" name="Temp" source="c:\Swapnil\Proj-Kuvera\API Automation\API_RF\API_Tests\temp.robot">
+<test id="s1-t1" name="testcase">
+<kw name="Log" library="BuiltIn">
+<arg>india</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20220322 11:45:07.002" level="INFO">india</msg>
+<status status="PASS" starttime="20220322 11:45:07.001" endtime="20220322 11:45:07.003"/>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>mysession</arg>
+<arg>${base_url}</arg>
+<arg>verify=true</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20220322 11:45:07.008" level="INFO">Creating Session using : alias=mysession, url=https://ecommerceservice.herokuapp.com/user, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<status status="PASS" starttime="20220322 11:45:07.005" endtime="20220322 11:45:07.008"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${body}</var>
+<arg>email=swapnil</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20220322 11:45:07.010" level="INFO">${body} = {'email': 'swapnil'}</msg>
+<status status="PASS" starttime="20220322 11:45:07.009" endtime="20220322 11:45:07.010"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${header}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20220322 11:45:07.011" level="INFO">${header} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20220322 11:45:07.011" endtime="20220322 11:45:07.011"/>
+</kw>
+<kw name="POST On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>mysession</arg>
+<arg>/signup</arg>
+<arg>data=${body}</arg>
+<arg>headers=${header}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<msg timestamp="20220322 11:45:08.250" level="INFO">POST Request : url=https://ecommerceservice.herokuapp.com/user/signup 
+ path_url=/user/signup 
+ headers={'User-Agent': 'python-requests/2.27.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '13'} 
+ body=email=swapnil 
+ </msg>
+<msg timestamp="20220322 11:45:08.250" level="INFO">POST Response : url=https://ecommerceservice.herokuapp.com/user/signup 
+ status=400, reason=Bad Request 
+ headers={'Server': 'Cowboy', 'Connection': 'keep-alive', 'X-Powered-By': 'Express', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '107', 'Etag': 'W/"6b-sgyS9I9Zp3t7bDAPDWcR5zePtvU"', 'Date': 'Tue, 22 Mar 2022 06:15:08 GMT', 'Via': '1.1 vegur'} 
+ body={"error":{"expose":true,"statusCode":400,"status":400,"body":"email=swapnil","type":"entity.parse.failed"}} 
+ </msg>
+<msg timestamp="20220322 11:45:08.253" level="FAIL">HTTPError: 400 Client Error: Bad Request for url: https://ecommerceservice.herokuapp.com/user/signup</msg>
+<status status="FAIL" starttime="20220322 11:45:07.012" endtime="20220322 11:45:08.253"/>
+</kw>
+<status status="FAIL" starttime="20220322 11:45:07.000" endtime="20220322 11:45:08.254">HTTPError: 400 Client Error: Bad Request for url: https://ecommerceservice.herokuapp.com/user/signup</status>
+</test>
+<status status="FAIL" starttime="20220322 11:45:06.644" endtime="20220322 11:45:08.257"/>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="1" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="0" fail="1" skip="0" id="s1" name="Temp">Temp</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
