@@ -467,7 +467,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\r\n\t\"product\": \"62283c6dd7cea500172f11d2\",\r\n\t\"quantity\": 50\r\n}\r\n",
+          "raw": "{\r\n\t\"product\": \"62283c6dd7cea500172f11d2\",\r\n\t\"quantity\": 7\r\n}\r\n",
           "options": {
             "raw": {
               "language": "json"
