@@ -9,6 +9,7 @@ Library    String
 *** Variables ***
 ${base_url}        https://ecommerceservice.herokuapp.com
 ${Bearer_Token}    Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjM5ODQ0OGUzYTYzNzAwMTczYmE3NWUiLCJpYXQiOjE2NDgxMDA5OTcsImV4cCI6MTY0ODE4NzM5N30.Yt7KZQLp_5LGBCmyfCPefOs9Dn65f13N9WfIaWCyiRI
+${sccesstokeen}    Bearer ${accesstoken}
 *** Test Cases ***
 Login into system
     Create Session    LoginSession    ${base_url}    verify=true
@@ -24,9 +25,8 @@ Login into system
 
 Get All Userlist
     Create Session    AllUserSession    ${base_url}    verify=true
-    ${header}=    Create Dictionary    Content-Type=application/json
-    ${params}=    Create Directory    Authorization=${Bearer_Token}
-    ${response}=    Post Request    AllUserSession    /user    headers=${header}    params=${params}       
+    ${header}=    Create Dictionary    Content-Type=application/json    Authorization=${sccesstokeen}
+    ${response}=    Post Request    AllUserSession    /user    headers=${header}     
     Log To Console    ${response.status_code}
     Log To Console    ${response.content}
 

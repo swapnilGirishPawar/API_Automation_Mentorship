@@ -1,76 +1,150 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 4.0.2 (Python 3.10.1 on win32)" generated="20220324 15:59:09.277" rpa="false" schemaversion="2">
-<suite id="s1" name="E-CommerceAPI" source="c:\Swapnil\Proj-Kuvera\API Automation\API_RF\API_Tests\E-CommerceAPI.robot">
-<test id="s1-t1" name="Get All Userlist">
+<robot generator="Robot 4.0.2 (Python 3.10.1 on win32)" generated="20220324 17:05:29.616" rpa="false" schemaversion="2">
+<suite id="s1" name="E-CommerceAPI" source="C:\Swapnil\Proj-Kuvera\API Automation\API_RF\API_Tests\E-CommerceAPI.robot">
+<test id="s1-t1" name="Login into system">
 <kw name="Create Session" library="RequestsLibrary">
-<arg>AllUserSession</arg>
+<arg>LoginSession</arg>
 <arg>${base_url}</arg>
 <arg>verify=true</arg>
 <doc>Create Session: create a HTTP session to a server</doc>
-<msg timestamp="20220324 15:59:10.709" level="INFO">Creating Session using : alias=AllUserSession, url=https://ecommerceservice.herokuapp.com, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
-<status status="PASS" starttime="20220324 15:59:10.708" endtime="20220324 15:59:10.710"/>
+<msg timestamp="20220324 17:05:30.040" level="INFO">Creating Session using : alias=LoginSession, url=https://ecommerceservice.herokuapp.com, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<status status="PASS" starttime="20220324 17:05:30.039" endtime="20220324 17:05:30.040"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${body}</var>
+<arg>email=swapnil587@gmail.com</arg>
+<arg>password=swapnil@12321</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20220324 17:05:30.042" level="INFO">${body} = {'email': 'swapnil587@gmail.com', 'password': 'swapnil@12321'}</msg>
+<status status="PASS" starttime="20220324 17:05:30.041" endtime="20220324 17:05:30.042"/>
 </kw>
 <kw name="Create Dictionary" library="BuiltIn">
 <var>${header}</var>
 <arg>Content-Type=application/json</arg>
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<msg timestamp="20220324 15:59:10.728" level="INFO">${header} = {'Content-Type': 'application/json'}</msg>
-<status status="PASS" starttime="20220324 15:59:10.727" endtime="20220324 15:59:10.728"/>
+<msg timestamp="20220324 17:05:30.045" level="INFO">${header} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20220324 17:05:30.043" endtime="20220324 17:05:30.046"/>
 </kw>
 <kw name="Create Directory" library="OperatingSystem">
 <var>${params}</var>
 <arg>Authorization=${Bearer_Token}</arg>
 <doc>Creates the specified directory.</doc>
-<msg timestamp="20220324 15:59:10.767" level="INFO" html="true">Directory '&lt;a href="file://C:\Swapnil\Proj-Kuvera\API Automation\API_RF\Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjM5ODQ0OGUzYTYzNzAwMTczYmE3NWUiLCJpYXQiOjE2NDgxMDA5OTcsImV4cCI6MTY0ODE4NzM5N30.Yt7KZQLp_5LGBCmyfCPefOs9Dn65f13N9WfIaWCyiRI"&gt;C:\Swapnil\Proj-Kuvera\API Automation\API_RF\Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjM5ODQ0OGUzYTYzNzAwMTczYmE3NWUiLCJpYXQiOjE2NDgxMDA5OTcsImV4cCI6MTY0ODE4NzM5N30.Yt7KZQLp_5LGBCmyfCPefOs9Dn65f13N9WfIaWCyiRI&lt;/a&gt;' already exists.</msg>
-<msg timestamp="20220324 15:59:10.767" level="INFO">${params} = None</msg>
-<status status="PASS" starttime="20220324 15:59:10.766" endtime="20220324 15:59:10.767"/>
+<msg timestamp="20220324 17:05:30.048" level="INFO" html="true">Directory '&lt;a href="file://C:\Swapnil\Proj-Kuvera\API Automation\API_RF\Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjM5ODQ0OGUzYTYzNzAwMTczYmE3NWUiLCJpYXQiOjE2NDgxMDA5OTcsImV4cCI6MTY0ODE4NzM5N30.Yt7KZQLp_5LGBCmyfCPefOs9Dn65f13N9WfIaWCyiRI"&gt;C:\Swapnil\Proj-Kuvera\API Automation\API_RF\Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjM5ODQ0OGUzYTYzNzAwMTczYmE3NWUiLCJpYXQiOjE2NDgxMDA5OTcsImV4cCI6MTY0ODE4NzM5N30.Yt7KZQLp_5LGBCmyfCPefOs9Dn65f13N9WfIaWCyiRI&lt;/a&gt;' already exists.</msg>
+<msg timestamp="20220324 17:05:30.048" level="INFO">${params} = None</msg>
+<status status="PASS" starttime="20220324 17:05:30.047" endtime="20220324 17:05:30.048"/>
+</kw>
+<kw name="Post Request" library="RequestsLibrary">
+<var>${response}</var>
+<arg>LoginSession</arg>
+<arg>/user/login</arg>
+<arg>data=${body}</arg>
+<arg>headers=${header}</arg>
+<arg>params=${params}</arg>
+<doc>*DEPRECATED* Please use `POST On Session` instead.</doc>
+<msg timestamp="20220324 17:05:30.050" level="WARN">Keyword 'RequestsLibrary.Post Request' is deprecated. Please use `POST On Session` instead.</msg>
+<msg timestamp="20220324 17:05:33.721" level="INFO">POST Request : url=https://ecommerceservice.herokuapp.com/user/login 
+ path_url=/user/login 
+ headers={'User-Agent': 'python-requests/2.27.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '62'} 
+ body={"email": "swapnil587@gmail.com", "password": "swapnil@12321"} 
+ </msg>
+<msg timestamp="20220324 17:05:33.721" level="INFO">POST Response : url=https://ecommerceservice.herokuapp.com/user/login 
+ status=200, reason=OK 
+ headers={'Server': 'Cowboy', 'Connection': 'keep-alive', 'X-Powered-By': 'Express', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '253', 'Etag': 'W/"fd-XfVD9VImt28r4v2B6Wvh+/3qcGs"', 'Date': 'Thu, 24 Mar 2022 11:35:33 GMT', 'Via': '1.1 vegur'} 
+ body={"message":"User authorization successful","accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjNjMGUzMWI0Njg4YjAwMTcyZDJjZGQiLCJpYXQiOjE2NDgxMjE3MzMsImV4cCI6MTY0ODIwODEzM30.OVun8cZHNNrsewHDKPMnT1cYVcUnla6GnrPjBbkRvc8","expiresIn":"24 hrs"} 
+ </msg>
+<msg timestamp="20220324 17:05:33.721" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220324 17:05:30.049" endtime="20220324 17:05:33.722"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${response.status_code}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20220324 17:05:33.722" endtime="20220324 17:05:33.724"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${jsonRes}</var>
+<arg>${response.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20220324 17:05:33.727" level="INFO">${jsonRes} = {'message': 'User authorization successful', 'accessToken': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjNjMGUzMWI0Njg4YjAwMTcyZDJjZGQiLCJpYXQiOjE2NDgxMjE3MzMsImV4cCI6MTY0ODIwODEzM30.OVun8cZHNN...</msg>
+<status status="PASS" starttime="20220324 17:05:33.725" endtime="20220324 17:05:33.727"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${jsonRes}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20220324 17:05:33.728" endtime="20220324 17:05:33.730"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${act}</var>
+<arg>${jsonRes}</arg>
+<arg>$.accessToken</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20220324 17:05:33.787" level="INFO">${act} = ['eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjNjMGUzMWI0Njg4YjAwMTcyZDJjZGQiLCJpYXQiOjE2NDgxMjE3MzMsImV4cCI6MTY0ODIwODEzM30.OVun8cZHNNrsewHDKPMnT1cYVcUnla6GnrPjBbkRvc8']</msg>
+<status status="PASS" starttime="20220324 17:05:33.731" endtime="20220324 17:05:33.787"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${accesstoken}</arg>
+<arg>${act}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20220324 17:05:33.790" level="INFO">${accesstoken} = ['eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjNjMGUzMWI0Njg4YjAwMTcyZDJjZGQiLCJpYXQiOjE2NDgxMjE3MzMsImV4cCI6MTY0ODIwODEzM30.OVun8cZHNNrsewHDKPMnT1cYVcUnla6GnrPjBbkRvc8']</msg>
+<status status="PASS" starttime="20220324 17:05:33.788" endtime="20220324 17:05:33.790"/>
+</kw>
+<status status="PASS" starttime="20220324 17:05:30.038" endtime="20220324 17:05:33.790"/>
+</test>
+<test id="s1-t2" name="Get All Userlist">
+<kw name="Create Session" library="RequestsLibrary">
+<arg>AllUserSession</arg>
+<arg>${base_url}</arg>
+<arg>verify=true</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20220324 17:05:33.795" level="INFO">Creating Session using : alias=AllUserSession, url=https://ecommerceservice.herokuapp.com, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<status status="PASS" starttime="20220324 17:05:33.795" endtime="20220324 17:05:33.796"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${header}</var>
+<arg>Content-Type=application/json</arg>
+<arg>Authorization=${sccesstokeen}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20220324 17:05:33.800" level="FAIL">Variable '${sccesstokeen}' not found. Did you mean:
+    ${accesstoken}</msg>
+<status status="FAIL" starttime="20220324 17:05:33.796" endtime="20220324 17:05:33.800"/>
 </kw>
 <kw name="Post Request" library="RequestsLibrary">
 <var>${response}</var>
 <arg>AllUserSession</arg>
 <arg>/user</arg>
 <arg>headers=${header}</arg>
-<arg>params=${params}</arg>
 <doc>*DEPRECATED* Please use `POST On Session` instead.</doc>
-<msg timestamp="20220324 15:59:10.781" level="WARN">Keyword 'RequestsLibrary.Post Request' is deprecated. Please use `POST On Session` instead.</msg>
-<msg timestamp="20220324 15:59:11.796" level="INFO">POST Request : url=https://ecommerceservice.herokuapp.com/user 
- path_url=/user 
- headers={'User-Agent': 'python-requests/2.27.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '0'} 
- body=None 
- </msg>
-<msg timestamp="20220324 15:59:11.797" level="INFO">POST Response : url=https://ecommerceservice.herokuapp.com/user 
- status=404, reason=Not Found 
- headers={'Server': 'Cowboy', 'Connection': 'keep-alive', 'X-Powered-By': 'Express', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '46', 'Etag': 'W/"2e-em7jHpozRg7bPewic4rGbUuKLP0"', 'Date': 'Thu, 24 Mar 2022 10:29:11 GMT', 'Via': '1.1 vegur'} 
- body={"error":{"message":"Not Found","status":404}} 
- </msg>
-<msg timestamp="20220324 15:59:11.797" level="INFO">${response} = &lt;Response [404]&gt;</msg>
-<status status="PASS" starttime="20220324 15:59:10.776" endtime="20220324 15:59:11.797"/>
+<msg timestamp="20220324 17:05:33.801" level="WARN">Keyword 'RequestsLibrary.Post Request' is deprecated. Please use `POST On Session` instead.</msg>
+<status status="NOT RUN" starttime="20220324 17:05:33.801" endtime="20220324 17:05:33.802"/>
 </kw>
 <kw name="Log To Console" library="BuiltIn">
 <arg>${response.status_code}</arg>
 <doc>Logs the given message to the console.</doc>
-<status status="PASS" starttime="20220324 15:59:11.798" endtime="20220324 15:59:11.801"/>
+<status status="NOT RUN" starttime="20220324 17:05:33.803" endtime="20220324 17:05:33.803"/>
 </kw>
 <kw name="Log To Console" library="BuiltIn">
 <arg>${response.content}</arg>
 <doc>Logs the given message to the console.</doc>
-<status status="PASS" starttime="20220324 15:59:11.801" endtime="20220324 15:59:11.804"/>
+<status status="NOT RUN" starttime="20220324 17:05:33.804" endtime="20220324 17:05:33.804"/>
 </kw>
-<status status="PASS" starttime="20220324 15:59:10.707" endtime="20220324 15:59:11.804"/>
+<status status="FAIL" starttime="20220324 17:05:33.792" endtime="20220324 17:05:33.805">Variable '${sccesstokeen}' not found. Did you mean:
+    ${accesstoken}</status>
 </test>
-<status status="PASS" starttime="20220324 15:59:09.282" endtime="20220324 15:59:11.807"/>
+<status status="FAIL" starttime="20220324 17:05:29.620" endtime="20220324 17:05:33.808"/>
 </suite>
 <statistics>
 <total>
-<stat pass="1" fail="0" skip="0">All Tests</stat>
+<stat pass="1" fail="1" skip="0">All Tests</stat>
 </total>
 <tag>
 </tag>
 <suite>
-<stat pass="1" fail="0" skip="0" id="s1" name="E-CommerceAPI">E-CommerceAPI</stat>
+<stat pass="1" fail="1" skip="0" id="s1" name="E-CommerceAPI">E-CommerceAPI</stat>
 </suite>
 </statistics>
 <errors>
-<msg timestamp="20220324 15:59:10.781" level="WARN">Keyword 'RequestsLibrary.Post Request' is deprecated. Please use `POST On Session` instead.</msg>
+<msg timestamp="20220324 17:05:30.034" level="ERROR">Error in file 'C:\Swapnil\Proj-Kuvera\API Automation\API_RF\API_Tests\E-CommerceAPI.robot' on line 12: Setting variable '${sccesstokeen}' failed: Variable '${accesstoken}' not found. Did you mean:
+    ${sccesstokeen}</msg>
+<msg timestamp="20220324 17:05:30.050" level="WARN">Keyword 'RequestsLibrary.Post Request' is deprecated. Please use `POST On Session` instead.</msg>
+<msg timestamp="20220324 17:05:33.801" level="WARN">Keyword 'RequestsLibrary.Post Request' is deprecated. Please use `POST On Session` instead.</msg>
 </errors>
 </robot>
