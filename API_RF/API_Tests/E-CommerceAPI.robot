@@ -3,6 +3,7 @@ Library    Collections
 Library    RequestsLibrary
 Library    OperatingSystem
 Library    JSONLibrary
+Library    String
 
 
 *** Variables ***
@@ -14,11 +15,14 @@ Login into system
     ${body}=    Create Dictionary    email=swapnil587@gmail.com    password=swapnil@12321
     ${header}=    Create Dictionary    Content-Type=application/json
     ${params}=    Create Directory    Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjM5ODQ0OGUzYTYzNzAwMTczYmE3NWUiLCJpYXQiOjE2NDgxMDA5OTcsImV4cCI6MTY0ODE4NzM5N30.Yt7KZQLp_5LGBCmyfCPefOs9Dn65f13N9WfIaWCyiRI
-    ${response}=    Post Request    LoginSession    /login    data=${body}    headers=${header}    params=${params}            
+    ${response}=    Post Request    LoginSession    /login    data=${body}    headers=${header}    params=${params}       
     Log To Console    ${response.status_code}
-    Log To Console    hello
-    ${accesstoken}=    Get Value From Json    ${response.content}    $.accessToken
+    Log To Console    ${response.content}
+    ${accesstoken}=    Get Value From Json    ${response.content}    $..message    
     Log To Console    ${accesstoken}
+    
+
+    
 
 *** Keywords ***
 New_User_SignUp
@@ -34,4 +38,4 @@ New_User_SignUp
     ${statusCode}=    Convert To String    ${response.status_code}
     Should Be Equal    ${statusCode}    201
     ${res_body}=    Convert To String    ${response.content}
-    Should Contain    ${res_body}    User signup successfully     
+    Should Contain    ${res_body}    User signup successfully
