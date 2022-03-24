@@ -1,0 +1,608 @@
+{
+  "info": {
+    "_postman_id": "6d14bb41-83d5-4e79-b102-a4e14cacfaef",
+    "name": "E-commerce(Automation)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "signup",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "0c259e45-4076-45bf-9654-d13692456924",
+            "exec": [
+              "pm.test(\"Status code is 201\", function () {\r",
+              "    pm.response.to.have.status(201);\r",
+              "});\r",
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "id": "2b966925-04c1-4be7-94c1-8a6d2bda17c2",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n\t\"email\": \"swapnilpawar42@gmail.com\",\r\n\t\"password\": \"swapnil@12321\"\r\n}   ",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": "https://ecommerceservice.herokuapp.com/user/signup"
+      },
+      "response": []
+    },
+    {
+      "name": "login",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "4e1dce71-b28f-41de-8a0c-8a51468dd987",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "const jsonData = pm.response.json();\r",
+              "console.log(jsonData.accessToken)\r",
+              "pm.environment.set(\"token\",jsonData.accessToken)\r",
+              "\r",
+              "const body = JSON.parse(pm.request.body.raw)\r",
+              "console.log (body.email)\r",
+              "\r",
+              "pm.environment.set(\"NewEmail\", body.email);\r",
+              "\r",
+              "\r",
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "4ba6daa4-df04-473e-b4ef-cca69addfbe9",
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "id": "7763a0f0-b0c0-4c1d-bebd-525831e16a72",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n\t\"email\": \"swapnilpawar32@gmail.com\",\r\n\t\"password\": \"swapnil@12321\"\r\n}   ",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://ecommerceservice.herokuapp.com/user/login?Authorization=Bearer {{token}}",
+          "protocol": "https",
+          "host": [
+            "ecommerceservice",
+            "herokuapp",
+            "com"
+          ],
+          "path": [
+            "user",
+            "login"
+          ],
+          "query": [
+            {
+              "key": "Authorization",
+              "value": "Bearer {{token}}"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "getalluser",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "12d6f8a6-22cf-4dd3-a4e1-72dbc63a0d0d",
+            "exec": [
+              "\r",
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "const jsonData = pm.response.json();\r",
+              "const count = jsonData.count\r",
+              "const email1 = pm.environment.get(\"NewEmail\")  //Done\r",
+              "console.log(email1)\r",
+              "for (var i=0;i<count;i++)\r",
+              "{\r",
+              "    if (jsonData.users[i].email == email1)\r",
+              "    {\r",
+              "        pid = jsonData.users[i]._id;\r",
+              "        //email = jsonDara.users[i].email;\r",
+              "    };\r",
+              "};\r",
+              "console.log(pid)    \r",
+              "pm.environment.set(\"USERID\", pid);\r",
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "id": "1490c4fb-6bf2-4736-8d34-a93320071958",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "",
+            "value": "",
+            "type": "text",
+            "disabled": true
+          },
+          {
+            "warning": "This is a duplicate header and will be overridden by the Authorization header generated by Postman.",
+            "key": "Authorization",
+            "value": "Bearer {{token}}",
+            "type": "text"
+          }
+        ],
+        "url": "https://ecommerceservice.herokuapp.com/user"
+      },
+      "response": []
+    },
+    {
+      "name": "DeleteUserByID",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "f6700d1e-bdbf-43a9-91c4-2245241f2e5a",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "id": "6c5ea397-7afd-484a-9882-6e6e3f67a165",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": {
+            "token": "{{token}}"
+          }
+        },
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "",
+            "value": "",
+            "type": "text",
+            "disabled": true
+          }
+        ],
+        "url": "https://ecommerceservice.herokuapp.com/user/{{USERID}}"
+      },
+      "response": []
+    },
+    {
+      "name": "All_Products",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "04f3e0e5-454d-4eb7-a2b5-a06624194986",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "id": "6f51b443-7f93-4c3a-83ad-4ffe276f8d93",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}",
+            "type": "text"
+          }
+        ],
+        "url": "https://ecommerceservice.herokuapp.com/products"
+      },
+      "response": []
+    },
+    {
+      "name": "Create_Products",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "0f4ab2bf-9562-47f1-8ef8-917c3da68708",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "const val = pm.response.json()\r",
+              "console.log(val.product._id)\r",
+              "pm.environment.set(\"productid\", val.product._id);"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "id": "4db138da-3a3e-4ca5-a067-8e45e3f5645d",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n\t\"name\": \"Bluetooth Headphone\",\r\n\t\"price\": 5024\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": "https://ecommerceservice.herokuapp.com/products"
+      },
+      "response": []
+    },
+    {
+      "name": "get_product_ by_id",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "dab9eaac-b0cf-4cad-ac19-a2797ac4f099",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "id": "c6a1f136-f577-4aa2-9465-ec361a611533",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}",
+            "type": "text"
+          }
+        ],
+        "url": "https://ecommerceservice.herokuapp.com/products/{{productid}}"
+      },
+      "response": []
+    },
+    {
+      "name": "update productby id",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "0f693629-3c32-4a00-af71-01628b749906",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "id": "f6d4bd27-8558-454a-8bc2-04ba7d4a9da2",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n\t\"name\": \"Bluetooth mini Headphone\",\r\n\t\"price\": 10000\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": "https://ecommerceservice.herokuapp.com/products/{{productid}}"
+      },
+      "response": []
+    },
+    {
+      "name": "delete_product_by_id",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "a4a698a8-8a29-46fb-bb73-ba7f785cc152",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "id": "80050f6e-4a84-48f9-a20a-04ed34cfd57f",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "https://ecommerceservice.herokuapp.com/products/{{productid}}",
+          "protocol": "https",
+          "host": [
+            "ecommerceservice",
+            "herokuapp",
+            "com"
+          ],
+          "path": [
+            "products",
+            "{{productid}}"
+          ],
+          "query": [
+            {
+              "key": "",
+              "value": null,
+              "type": "text",
+              "disabled": true
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Order",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "71f71c16-6854-4ff4-99a1-072529ed6239",
+            "exec": [
+              "pm.test(\"Status code is 201\", function () {\r",
+              "    pm.response.to.have.status(201);\r",
+              "});\r",
+              "\r",
+              "const val = pm.response.json()\r",
+              "console.log(val.order._id)\r",
+              "\r",
+              "pm.environment.set(\"createdOrderId\", val.order._id);\r",
+              "pm.environment.set(\"createdProductId\", val.order.product);"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "id": "e54df9b5-c823-4a42-8405-d28414792eb8",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n\t\"product\": \"62283c6dd7cea500172f11d2\",\r\n\t\"quantity\": 7\r\n}\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://ecommerceservice.herokuapp.com/orders?Authorization=Bearer {{token}}",
+          "protocol": "https",
+          "host": [
+            "ecommerceservice",
+            "herokuapp",
+            "com"
+          ],
+          "path": [
+            "orders"
+          ],
+          "query": [
+            {
+              "key": "Authorization",
+              "value": "Bearer {{token}}"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "get-all-orders",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "e6a99885-9f7b-41a8-8637-c8700d529669",
+            "exec": [
+              "if (    pm.response.to.have.status(200))\r",
+              "    {\r",
+              "        pm.test(\"Status code is 200\");\r",
+              "        const jsonData = pm.response.json();\r",
+              "console.log(jsonData.orders[1]._id)\r",
+              "const orderid = jsonData.orders[1]._id\r",
+              "\r",
+              "pm.environment.set(\"order_id\", orderid);\r",
+              "    }\r",
+              "\r",
+              "\r",
+              "\r",
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "id": "f36af88f-5098-45b4-b593-c3b201e20a1b",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": {
+            "token": "{{token}}"
+          }
+        },
+        "method": "GET",
+        "header": [],
+        "url": "https://ecommerceservice.herokuapp.com/orders"
+      },
+      "response": []
+    },
+    {
+      "name": "get_order_by_id",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "a48ecf21-5d7f-41a6-ad96-fdbb56ffbe92",
+            "exec": [
+              "pm.test(\"Status code is 201\", function () {\r",
+              "    pm.response.to.have.status(201);\r",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "id": "a6136f95-3331-4c9e-97b3-c9ae244415c8",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": {
+            "token": "{{token}}"
+          }
+        },
+        "method": "GET",
+        "header": [],
+        "url": "https://ecommerceservice.herokuapp.com/orders/{{createdOrderId}}"
+      },
+      "response": []
+    },
+    {
+      "name": "delete_order_by_id",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "a29cf598-83d0-4cae-877a-3a5bf4fd8375",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "id": "f1cf4486-3a6f-4c98-aaa7-99b158083459",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": {
+            "token": "{{token}}"
+          }
+        },
+        "method": "DELETE",
+        "header": [],
+        "url": "https://ecommerceservice.herokuapp.com/orders/{{order_id}}"
+      },
+      "response": []
+    }
+  ]
+}
