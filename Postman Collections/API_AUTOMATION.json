@@ -34,7 +34,7 @@
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{\r\n\t\"email\": \"swapnilpawar32@gmail.com\",\r\n\t\"password\": \"swapnil@12321\"\r\n}   ",
+          "raw": "{\r\n\t\"email\": \"swapnilpawar42@gmail.com\",\r\n\t\"password\": \"swapnil@12321\"\r\n}   ",
           "options": {
             "raw": {
               "language": "json"
