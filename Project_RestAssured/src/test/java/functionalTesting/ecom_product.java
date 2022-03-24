@@ -244,6 +244,7 @@ RestAssured.baseURI = url;
 				.when().delete("/orders/"+CreatedOrderId)
 				.then().assertThat().statusCode(200).and().contentType(ContentType.JSON)
 				.extract().response();
+		
 				
 		String jsonData = response.asString();
 		JsonPath responseBody = new JsonPath(jsonData);
